@@ -1,119 +1,208 @@
-<p align="center">
-  <a href="" rel="noopener">
- <img width=200px height=200px src="https://i.imgur.com/6wj0hh6.jpg" alt="Project logo"></a>
-</p>
 
-<h3 align="center">Project Title</h3>
 
-<div align="center">
-
-[![Status](https://img.shields.io/badge/status-active-success.svg)]()
-[![GitHub Issues](https://img.shields.io/github/issues/kylelobo/The-Documentation-Compendium.svg)](https://github.com/kylelobo/The-Documentation-Compendium/issues)
-[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/kylelobo/The-Documentation-Compendium.svg)](https://github.com/kylelobo/The-Documentation-Compendium/pulls)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
-
-</div>
-
----
-
-<p align="center"> Few lines describing your project.
-    <br> 
-</p>
-
-## 📝 Table of Contents
+## Table of Contents
 
 - [About](#about)
 - [Getting Started](#getting_started)
 - [Deployment](#deployment)
-- [Usage](#usage)
-- [Built Using](#built_using)
-- [TODO](../TODO.md)
-- [Contributing](../CONTRIBUTING.md)
 - [Authors](#authors)
 - [Acknowledgments](#acknowledgement)
 
 ## About <a name = "about"></a>
 
-This repo contains serves for simple demo purposes for cdktf - Terraform Cloud Development Kit with Python.
+This repo serves for simple demo purposes of cdktf - Terraform Cloud Development Kit with Python.
 For that we are going to deploy an AKS cluster to Azure.
+<br />
+<br />
 
-## 🧐 Prerequisites <a name = "prerequisites"></a>
+## Prerequisites <a name = "prerequisites"></a>
 
  - Python3
  - pip
 
  If you installed Python from source, with an installer from python.org, or via Homebrew you should already have pip. If you’re on Linux and installed using your OS package manager, you may have to install pip [install pip](https://pip.pypa.io/en/stable/installing/) separately.
  - pipenv - You can install Pipenv by visiting the [website](https://pipenv.pypa.io/en/latest/) or Homebrew or pip:
- ```bash
+
+```bash
 $ brew install pipenv
 ```
+ 
+or
+
 ```bash
 $ pip install --user pipenv
 ```
 
-## 🏁 Getting Started <a name = "getting_started"></a>
+ - Terraform >= v0.12 [installation instructions](https://learn.hashicorp.com/tutorials/terraform/install-cli)
+ - Node.js >= v12.16 [installation instructions](https://nodejs.org/en/download/)
+ - Yarn >= v1.21 [installation instructions](https://classic.yarnpkg.com/en/docs/install)
+<br />
+<br /> 
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See [deployment](#deployment) for notes on how to deploy the project on a live system.
+## Getting Started <a name = "getting_started"></a>
 
 
-### Installing
+### Installing CDKTF
 
-A step by step series of examples that tell you how to get a development env running.
-
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
+ - Clone this repository
+ - Install cdktf
 
 ```
-until finished
+$ npm install --global cdktf-cli
 ```
 
-End with an example of getting some data out of the system or using it for a little demo.
-
-## 🔧 Running the tests <a name = "tests"></a>
-
-Explain how to run the automated tests for this system.
-
-### Break down into end to end tests
-
-Explain what these tests test and why
+or if you want the latest experimental version:
 
 ```
-Give an example
+$ npm install --global cdktf-cli@next
+```
+<br />
+
+### Verify installation
+ Verify that  installation works by opening a new terminal session and running the cdktf command to show available subcommands.
+
+ ```
+$ cdktf --help
+```
+<br />
+
+### Initialize project
+We start by creating and switching to a new folder like ```HelloCdktfWithPython```. Then we need to initialize a new project. We choose the programming language with the  ```--template``` parameter. In our case we choose "python".
+
+For that we use th cdkt init subcommand.
+Run help on that subcommand to see the available options.
+
+```
+cdktf init --help
 ```
 
-### And coding style tests
-
-Explain what these tests test and why
+We are also going to make use of the ```--local``` parameter to store the state file locally for simplicity.
 
 ```
-Give an example
+cdktf init --local --template=python --project-name "HelloCdktfWithPython"
 ```
 
-## 🎈 Usage <a name="usage"></a>
+The output should contain a line saying "```Your cdktf Python project is ready!```"
 
-Add notes about how to use the system.
+```init``` generates a couple of files for example ```main.py```  and ```cdktf.json```. The latter one is the CDK configuration file, where we now have to add some things like the Azure provider and a prebuilt AKS Terraform module.
+<br />
+<br />
 
-## 🚀 Deployment <a name = "deployment"></a>
+### Generate constructs
+Set the Azure provider and the AKS module in the ```cdktf.json``` configuration file like this:
 
-Add additional notes about how to deploy this on a live system.
+```
+{
+  "language": "python",
+  "app": "pipenv run python main.py",
+  "terraformProviders": ["azurerm@~> 2.0.0"],
+  "terraformModules": ["Azure/aks/azurerm"],
+  "codeMakerOutput": "imports"
+}
+```
 
-## ⛏️ Built Using <a name = "built_using"></a>
+For simplicity you can also overwrite this file with the according file in the ```src``` folder.
+We are going to make use of a prebuilt Terraform module for Aks.
+For more information on that see [the Terraform registry page](https://registry.terraform.io/modules/Azure/aks/azurerm/latest).
 
-- [MongoDB](https://www.mongodb.com/) - Database
-- [Express](https://expressjs.com/) - Server Framework
-- [VueJs](https://vuejs.org/) - Web Framework
-- [NodeJs](https://nodejs.org/en/) - Server Environment
+Next, we need to generate the Azure provider construct and the AKS module by invoking ```cdktf get```.
 
-## ✍️ Authors <a name = "authors"></a>
+```
+cdktf get
+```
+The output should be:
 
-- [@kylelobo](https://github.com/kylelobo) - Idea & Initial work
+```
+Generated python constructs in the output directory: imports
+```
 
-See also the list of [contributors](https://github.com/kylelobo/The-Documentation-Compendium/contributors) who participated in this project.
+### Set up Azure
+First make sure you are logged in to Azure.
+
+```
+az login
+```
+
+As a next step we need to set up an Azure Service Principle.
+
+```
+az ad sp create-for-rbac -n "MyCdktfApp"
+```
+
+In the output find the ```appid``` and ```password``` values and set the following environment variables
+
+```
+export SP_CLIENT_APP_ID=[appid]
+export SP_CLIENT_APP_SECRET=[password]
+```
+
+Since we are going to use a module for AKS we need to make sure a resource group has been created before we run ```cdktf synth```.
+
+```
+az group create -n "cdktf_rgr" -l "West Europe"
+```
+
+### Set up the CDKTF App
+Please have a look at the generated main.py file. This file currently does not deploy any Azure resources.
+There is a placeholder saying ```# define resources here```. And that is what we are going to do next.
+Replace the content of the main.py file with the according file in the src folder.
+Now you can see that we have defined at least 1 resource. It's the Aks module. And that is actually all we need to deploy the AKS cluster.
+
+```
+#!/usr/bin/env python
+import os
+from constructs import Construct
+from cdktf import App, TerraformStack, TerraformOutput
+from imports.azurerm import AzurermProvider, ResourceGroup
+from imports.Azure.aks.azurerm import Aks
+
+class MyStack(TerraformStack):
+    def __init__(self, scope: Construct, ns: str):
+        super().__init__(scope, ns)
+
+        AzurermProvider(self, "Azure", features=[{}])
+        aks_cluster = Aks(self, "AKS", resource_group_name="cdktf_rg", prefix="akscdktftostille-42f2",            
+            client_id=os.environ['SP_CLIENT_APP_ID'],
+            client_secret=os.environ['SP_CLIENT_APP_SECRET'])
+
+app = App()
+MyStack(app, "HelloCdktfWithPython")
+app.synth()
+```
+
+Now it is time to run ```cdktf synth```. The output will look like
+
+```
+Generated Terraform code in the output directory: cdktf.out
+```
+
+Have a look at the terraform code that has been generated.
+If all looks fine then run
+
+```
+cdktf deploy
+```
+
+and confirm with ```yes```.
+
+Finally the AKS cluster will be deployed and the output looks similar to 
+
+```
+Deploying Stack: HelloCdktfWithPython
+Resources
+ ✔ module.HelloCdktfWithPython_AKS_50BD9D1C.azurerm_kubernetes_cluster.main
+ ~ module.HelloCdktfWithPython_AKS_50BD9D1C.azurerm_log_analytics_solution.main[0]
+ ~ module.HelloCdktfWithPython_AKS_50BD9D1C.azurerm_log_analytics_workspace.main[0]
+ ~ module.HelloCdktfWithPython_AKS_50BD9D1C.module.ssh-key.local_file.private_key[0]
+ ~ module.HelloCdktfWithPython_AKS_50BD9D1C.module.ssh-key.tls_private_key.ssh
+```
+
+
+## Authors <a name = "authors"></a>
+
+- [@pmrz00](https://github.com/pmRz00) - Idea & Initial work
+
+See also the list of [contributors](https://github.com/hashicorp/terraform-cdk/graphs/contributors) who participated in the CDKTF project.
 
 ## 🎉 Acknowledgements <a name = "acknowledgement"></a>
 
