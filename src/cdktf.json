@@ -1,0 +1,7 @@
+{
+    "language": "python",
+    "app": "pipenv run python main.py",
+    "terraformProviders": ["azurerm@~> 2.0.0"],
+    "terraformModules": ["Azure/aks/azurerm"],
+    "codeMakerOutput": "imports"
+}
