@@ -1,5 +1,5 @@
 {
-  "name": "SwitchCostProfileCdktf",
+  "name": "switchcostprofilecdktf",
   "version": "1.0.0",
   "main": "main.js",
   "types": "main.ts",
@@ -13,14 +13,15 @@
     "watch": "tsc -w",
     "test": "echo ok",
     "upgrade": "npm i cdktf@latest cdktf-cli@latest",
-    "upgrade:next": "npm i cdktf@next cdktf-cli@next"
+    "upgrade:next": "npm i cdktf@next cdktf-cli@next",
+    "tf-plan": "cd cdktf.out && terraform plan -state=../terraform.tfstate",
+    "tf-apply": "cd cdktf.out && terraform apply -state=../terraform.tfstate"
   },
   "engines": {
     "node": ">=10.12"
   },
   "dependencies": {
-    "@cdktf/provider-aws": "0.0.80",
-    "@cdktf/provider-azurerm": "0.0.66",
+    "@cdktf/provider-azurerm": "^0.0.70",
     "cdktf": "0.0.18",
     "constructs": "^3.2.46"
   },

@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@cdktf/provider-azurerm": "^0.0.70"
+  }
+}
