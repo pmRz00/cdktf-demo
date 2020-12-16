@@ -10,8 +10,9 @@
 
 ## About <a name = "about"></a>
 
-This repo serves for simple demo purposes of cdktf - Terraform Cloud Development Kit with Python.
-For that we are going to deploy an AKS cluster to Azure.
+This repo serves for some simple demo purposes of cdktf - Terraform Cloud Development Kit.
+Follwing this GEtting started guide if you wanto to learn get started with CDKTF and Python.
+If you want to see a more advanced example that illustrates how to use CDK Aspects in CDKTF in combination with polymorphic objects check out the [SwitchableTerraformResource Example](https://github.com/pmRz00/cdktf-demo/tree/master/SwitchCostProfileCdktf)
 <br />
 <br />
 
@@ -20,8 +21,8 @@ For that we are going to deploy an AKS cluster to Azure.
  - Terraform >= v0.12 [installation instructions](https://learn.hashicorp.com/tutorials/terraform/install-cli)
  - Node.js >= v12.16 [installation instructions](https://nodejs.org/en/download/)
  - Yarn >= v1.21 [installation instructions](https://classic.yarnpkg.com/en/docs/install)
-<br />
  - Whatever programming language you want to use like Python&pip, JDK, etc. 
+<br />
 <br /> 
 
 ## Getting Started <a name = "getting_started"></a>
