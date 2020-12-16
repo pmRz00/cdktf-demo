@@ -21,6 +21,7 @@ For that we are going to deploy an AKS cluster to Azure.
  - Node.js >= v12.16 [installation instructions](https://nodejs.org/en/download/)
  - Yarn >= v1.21 [installation instructions](https://classic.yarnpkg.com/en/docs/install)
 <br />
+ - Whatever programming language you want to use like Python&pip, JDK, etc. 
 <br /> 
 
 ## Getting Started <a name = "getting_started"></a>
@@ -85,7 +86,6 @@ Set the Azure provider and the AKS module in the ```cdktf.json``` configuration 
 }
 ```
 
-For simplicity you can also overwrite this file with the according file in the ```src``` folder.
 We are going to make use of a prebuilt Terraform module for Aks.
 For more information on that see [the Terraform registry page](https://registry.terraform.io/modules/Azure/aks/azurerm/latest).
 
@@ -129,7 +129,7 @@ az group create -n "cdktf_rgr" -l "West Europe"
 ### Set up the CDKTF App
 Please have a look at the generated main.py file. This file currently does not deploy any Azure resources.
 There is a placeholder saying ```# define resources here```. And that is what we are going to do next.
-Replace the content of the main.py file with the according file in the src folder.
+Replace the content of the main.py file with code below.
 Now you can see that we have defined at least 1 resource. It's the Aks module. And that is actually all we need to deploy the AKS cluster.
 
 ```
