@@ -17,22 +17,6 @@ For that we are going to deploy an AKS cluster to Azure.
 
 ## Prerequisites <a name = "prerequisites"></a>
 
- - Python3
- - pip
-
- If you installed Python from source, with an installer from python.org, or via Homebrew you should already have pip. If you’re on Linux and installed using your OS package manager, you may have to install pip [install pip](https://pip.pypa.io/en/stable/installing/) separately.
- - pipenv - You can install Pipenv by visiting the [website](https://pipenv.pypa.io/en/latest/) or Homebrew or pip:
-
-```bash
-$ brew install pipenv
-```
- 
-or
-
-```bash
-$ pip install --user pipenv
-```
-
  - Terraform >= v0.12 [installation instructions](https://learn.hashicorp.com/tutorials/terraform/install-cli)
  - Node.js >= v12.16 [installation instructions](https://nodejs.org/en/download/)
  - Yarn >= v1.21 [installation instructions](https://classic.yarnpkg.com/en/docs/install)
