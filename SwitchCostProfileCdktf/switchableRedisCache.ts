@@ -1,4 +1,4 @@
-import { RedisCache, RedisCacheConfig } from "@cdktf/provider-azurerm";
+import { RedisCache, RedisCacheConfig } from './.gen/providers/azurerm/redis-cache';
 import { Construct } from "constructs";
 import { Env } from "./environmentSwitch";
 import { SwitchableTerraformResource } from "./switchableTerraformResource";

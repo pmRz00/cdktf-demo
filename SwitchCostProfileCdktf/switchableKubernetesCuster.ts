@@ -1,4 +1,4 @@
-import { KubernetesCluster, KubernetesClusterConfig } from "@cdktf/provider-azurerm";
+import { KubernetesCluster, KubernetesClusterConfig } from './.gen/providers/azurerm/kubernetes-cluster';
 import { Construct } from "constructs";
 import { Env } from "./environmentSwitch";
 import { SwitchableTerraformResource } from "./switchableTerraformResource";

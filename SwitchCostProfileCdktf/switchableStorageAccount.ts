@@ -1,4 +1,4 @@
-import { StorageAccount, StorageAccountConfig } from "@cdktf/provider-azurerm";
+import { StorageAccount, StorageAccountConfig } from './.gen/providers/azurerm/storage-account';
 import { Construct } from "constructs";
 import { Env } from "./environmentSwitch";
 import { SwitchableTerraformResource } from "./switchableTerraformResource";

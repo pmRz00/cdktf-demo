@@ -1,4 +1,4 @@
-import { KeyVault, KeyVaultConfig } from "@cdktf/provider-azurerm";
+import { KeyVault, KeyVaultConfig } from './.gen/providers/azurerm/key-vault';
 import { Construct } from "constructs";
 import { Env } from "./environmentSwitch";
 import { SwitchableTerraformResource } from "./switchableTerraformResource";

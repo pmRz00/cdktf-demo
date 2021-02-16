@@ -5,7 +5,10 @@ import { SwitchableKubernetesCluster } from './switchableKubernetesCuster';
 import { SwitchableRedisCache } from './switchableRedisCache';
 import { SwitchableKeyVault } from './switchableKeyVault';
 import { RedisCacheConfig } from './.gen/providers/azurerm/redis-cache';
-import { AzurermProvider, KeyVaultConfig, KubernetesClusterConfig, KubernetesClusterDefaultNodePool, KubernetesClusterServicePrincipal, ResourceGroup, ResourceGroupConfig } from '@cdktf/provider-azurerm';
+import { AzurermProvider } from './.gen/providers/azurerm/azurerm-provider';
+import { ResourceGroupConfig, ResourceGroup } from './.gen/providers/azurerm/resource-group';
+import { KeyVaultConfig } from './.gen/providers/azurerm/key-vault';
+import { KubernetesClusterDefaultNodePool, KubernetesClusterServicePrincipal, KubernetesClusterConfig } from './.gen/providers/azurerm/kubernetes-cluster';
 
 
 class DemoStack extends TerraformStack {
