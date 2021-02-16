@@ -85,6 +85,6 @@ class DemoStack extends TerraformStack {
 }
 
 const app = new App();
-new DemoStack(app, 'typescript-azurerm-k8s')
+new DemoStack(app, 'typescript-azurerm-switchable')
 EnvironmentSwitch.enable(app, Env.DEV)
 app.synth();

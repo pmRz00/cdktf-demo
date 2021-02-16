@@ -10,14 +10,15 @@ export class SwitchableRedisCache extends RedisCache implements SwitchableTerraf
     }
     
     public switchEnvironment(env: Env): void {
-        this.enableNonSslPort = true
-        this.family = "C"
+        
         switch (env) {
             case Env.DEV: 
-                this.skuName = "Basic"             
+                this.skuName = "Basic"
+                this.enableNonSslPort = true            
                 break
             case Env.PROD:
                 this.skuName = "Standard"
+                this.enableNonSslPort = false
                 break
             case Env.DEFAULT:
         }
