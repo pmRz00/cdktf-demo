@@ -10,32 +10,18 @@
 
 ## About <a name = "about"></a>
 
-This repo serves for simple demo purposes of cdktf - Terraform Cloud Development Kit with Python.
-For that we are going to deploy an AKS cluster to Azure.
+This repo serves for some simple demo purposes of cdktf - Terraform Cloud Development Kit.
+Follwing this GEtting started guide if you wanto to learn get started with CDKTF and Python.
+If you want to see a more advanced example that illustrates how to use CDK Aspects in CDKTF in combination with polymorphic objects check out the [SwitchableTerraformResource Example](https://github.com/pmRz00/cdktf-demo/tree/master/SwitchCostProfileCdktf).
 <br />
 <br />
 
 ## Prerequisites <a name = "prerequisites"></a>
 
- - Python3
- - pip
-
- If you installed Python from source, with an installer from python.org, or via Homebrew you should already have pip. If you’re on Linux and installed using your OS package manager, you may have to install pip [install pip](https://pip.pypa.io/en/stable/installing/) separately.
- - pipenv - You can install Pipenv by visiting the [website](https://pipenv.pypa.io/en/latest/) or Homebrew or pip:
-
-```bash
-$ brew install pipenv
-```
- 
-or
-
-```bash
-$ pip install --user pipenv
-```
-
  - Terraform >= v0.12 [installation instructions](https://learn.hashicorp.com/tutorials/terraform/install-cli)
  - Node.js >= v12.16 [installation instructions](https://nodejs.org/en/download/)
  - Yarn >= v1.21 [installation instructions](https://classic.yarnpkg.com/en/docs/install)
+ - Whatever programming language you want to use like Python&pip, JDK, etc. 
 <br />
 <br /> 
 
@@ -101,7 +87,6 @@ Set the Azure provider and the AKS module in the ```cdktf.json``` configuration 
 }
 ```
 
-For simplicity you can also overwrite this file with the according file in the ```src``` folder.
 We are going to make use of a prebuilt Terraform module for Aks.
 For more information on that see [the Terraform registry page](https://registry.terraform.io/modules/Azure/aks/azurerm/latest).
 
@@ -145,7 +130,7 @@ az group create -n "cdktf_rgr" -l "West Europe"
 ### Set up the CDKTF App
 Please have a look at the generated main.py file. This file currently does not deploy any Azure resources.
 There is a placeholder saying ```# define resources here```. And that is what we are going to do next.
-Replace the content of the main.py file with the according file in the src folder.
+Replace the content of the main.py file with code below.
 Now you can see that we have defined at least 1 resource. It's the Aks module. And that is actually all we need to deploy the AKS cluster.
 
 ```
